@@ -1,2 +1,26 @@
-# Trapping-Rain-Water---2-Pointer-Approach
-Use left=0, right=n-1 and leftMax=0, rightMax=0.Move the pointer with smaller height, because water level is decided by the shorter side.If current height >= max on that side, update max.Else, water += max - current height.Repeat till left &lt; right.Time O(n), Space O(1).
+int trap(int* height, int heightSize) {
+    int left = 0, right = heightSize - 1;
+    int leftMax = 0, rightMax = 0;
+    int water = 0;
+
+    while (left < right) {
+        if (height[left] <= height[right]) {
+            if (height[left] >= leftMax) {
+                leftMax = height[left];
+            } else {
+                water += leftMax - height[left];
+            }
+            left++;
+        } 
+        else {
+            if (height[right] >= rightMax) {
+                rightMax = height[right];
+            } else {
+                water += rightMax - height[right];
+            }
+            right--;
+        }
+    }
+
+    return water;
+}
